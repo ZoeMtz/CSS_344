@@ -10,3 +10,5 @@ Work Allocation:
 - Implemented order submission, storage, and total calculation logic.
 - Built the management interface (login.html, manage.html, orders.html) for product and order handling.
 - Designed folder structure and uploaded pages to both Awardspace and GitHub.
+
+Link: http://sweetleadco.onlinewebshop.net/
