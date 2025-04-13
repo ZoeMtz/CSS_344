@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Order Management | Sweetleaf & Co.</title>
+  <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+<body class="p-4">
+  <h2>Manage Orders</h2>
+  <ul id="orderList"></ul>
+
+  <script>
+    let orders = JSON.parse(localStorage.getItem("orders") || "[]");
+    const list = document.getElementById("orderList");
+
+    function renderOrders() {
+      list.innerHTML = "";
+      orders.forEach((order, i) => {
+        let items = order.items.map(item => `${item.name} x ${item.quantity}`).join(", ");
+        list.innerHTML += `<li>
+          <strong>${order.date}</strong><br>
+          ${items} — $${order.total.toFixed(2)}
+          <button onclick="deleteOrder(${i})" class="btn btn-sm btn-danger">Delete</button>
+        </li>`;
+      });
+    }
+
+    function deleteOrder(i) {
+      if (confirm("Delete this order?")) {
+        orders.splice(i, 1);
+        localStorage.setItem("orders", JSON.stringify(orders));
+        renderOrders();
+      }
+    }
+
+    renderOrders();
+  </script>
+</body>
+</html>

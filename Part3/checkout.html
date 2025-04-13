@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Checkout | Sweetleaf & Co.</title>
+  <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+<body class="p-4">
+  <h2>Checkout</h2>
+  <form onsubmit="submitOrder(event)">
+    <input id="name" type="text" class="form-control mb-2" placeholder="Name" required>
+    <input id="email" type="email" class="form-control mb-2" placeholder="Email" required>
+    <ul id="cart-items"></ul>
+    <p>Total: $<span id="total"></span></p>
+    <button class="btn btn-success">Submit Order</button>
+  </form>
+
+  <script>
+    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+    let total = 0;
+    const list = document.getElementById("cart-items");
+
+    cart.forEach(item => {
+      total += item.price * item.quantity;
+      list.innerHTML += `<li>${item.name} x ${item.quantity} = $${(item.price * item.quantity).toFixed(2)}</li>`;
+    });
+    document.getElementById("total").innerText = total.toFixed(2);
+
+    function calculateTotal() {
+      return cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    }
+
+    function submitOrder(e) {
+      e.preventDefault();
+      const order = {
+        items: cart,
+        total: calculateTotal(),
+        date: new Date().toLocaleString()
+      };
+      let orders = JSON.parse(localStorage.getItem("orders") || "[]");
+      orders.push(order);
+      localStorage.setItem("orders", JSON.stringify(orders));
+      localStorage.removeItem("cart");
+      alert("Order submitted! Thank you, " + document.getElementById("name").value);
+    }
+  </script>
+</body>
+</html>

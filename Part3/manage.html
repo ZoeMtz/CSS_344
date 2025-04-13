@@ -1,0 +1,67 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Manage Store | Sweetleaf & Co.</title>
+  <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+<body class="p-4">
+  <h2>Manage Products</h2>
+  <form id="addForm">
+    <input type="text" id="productName" placeholder="Product Name" class="form-control mb-2" required>
+    <input type="number" id="productPrice" placeholder="Price" class="form-control mb-2" required>
+    <button class="btn btn-success">Add Product</button>
+  </form>
+
+  <ul id="productList" class="mt-3"></ul>
+
+  <script>
+    const list = document.getElementById("productList");
+    const products = JSON.parse(localStorage.getItem("manageProducts") || "[]");
+
+    function render() {
+      list.innerHTML = "";
+      products.forEach((p, i) => {
+        list.innerHTML += `<li>
+          ${p.name} - $${p.price.toFixed(2)}
+          <button onclick="edit(${i})" class="btn btn-sm btn-warning">Edit</button>
+          <button onclick="remove(${i})" class="btn btn-sm btn-danger">Delete</button>
+        </li>`;
+      });
+      localStorage.setItem("manageProducts", JSON.stringify(products));
+    }
+
+    function remove(i) {
+      products.splice(i, 1);
+      render();
+    }
+
+    function edit(i) {
+      const newName = prompt("Enter new name", products[i].name);
+      const newPrice = parseFloat(prompt("Enter new price", products[i].price));
+      if (newName && !isNaN(newPrice) && newPrice > 0) {
+        products[i].name = newName;
+        products[i].price = newPrice;
+        render();
+      } else {
+        alert("Invalid input.");
+      }
+    }
+
+    document.getElementById("addForm").onsubmit = function(e) {
+      e.preventDefault();
+      const name = productName.value.trim();
+      const price = parseFloat(productPrice.value);
+      if (!name || isNaN(price) || price <= 0) {
+        alert("Please provide valid product details.");
+        return;
+      }
+      products.push({ name, price });
+      productName.value = "";
+      productPrice.value = "";
+      render();
+    };
+
+    render();
+  </script>
+</body>
+</html>
