@@ -2,38 +2,55 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Order Management | Sweetleaf & Co.</title>
+  <title>View Orders | Sweetleaf & Co.</title>
   <link rel="stylesheet" href="css/bootstrap.css">
 </head>
-<body class="p-4">
-  <h2>Manage Orders</h2>
-  <ul id="orderList"></ul>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Sweetleaf & Co.</a>
+      <div class="ml-auto">
+        <a href="dashboard.html" class="btn btn-outline-primary">Admin Dashboard</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h2>Customer Orders</h2>
+    <div id="ordersContainer" class="mt-4"></div>
+  </div>
 
   <script>
-    let orders = JSON.parse(localStorage.getItem("orders") || "[]");
-    const list = document.getElementById("orderList");
+    if (localStorage.getItem("loggedIn") !== "true") {
+      window.location.href = "login.html";
+    }
 
-    function renderOrders() {
-      list.innerHTML = "";
-      orders.forEach((order, i) => {
-        let items = order.items.map(item => `${item.name} x ${item.quantity}`).join(", ");
-        list.innerHTML += `<li>
-          <strong>${order.date}</strong><br>
-          ${items} — $${order.total.toFixed(2)}
-          <button onclick="deleteOrder(${i})" class="btn btn-sm btn-danger">Delete</button>
-        </li>`;
+    function loadOrders() {
+      const container = document.getElementById("ordersContainer");
+      const orders = JSON.parse(localStorage.getItem("orders") || "[]");
+
+      if (orders.length === 0) {
+        container.innerHTML = "<p>No orders yet.</p>";
+        return;
+      }
+
+      orders.forEach((order, index) => {
+        let itemsHTML = order.cart.map(item => `<li>${item.name} x ${item.quantity}</li>`).join("");
+        container.innerHTML += `
+          <div class="card mb-4">
+            <div class="card-body">
+              <h5 class="card-title">Order #${index + 1}</h5>
+              <p><strong>Name:</strong> ${order.name}</p>
+              <p><strong>Email:</strong> ${order.email}</p>
+              <ul>${itemsHTML}</ul>
+              <p><strong>Total:</strong> $${order.total.toFixed(2)}</p>
+            </div>
+          </div>
+        `;
       });
     }
 
-    function deleteOrder(i) {
-      if (confirm("Delete this order?")) {
-        orders.splice(i, 1);
-        localStorage.setItem("orders", JSON.stringify(orders));
-        renderOrders();
-      }
-    }
-
-    renderOrders();
+    loadOrders();
   </script>
 </body>
 </html>
