@@ -785,4 +785,68 @@ a:focus {
 .footer_section .footer-info p a {
   color: inherit;
 }
+
+/* === Rustic Enhancements === */
+body {
+  font-family: 'Playfair Display', serif;
+  background: url('assets/background.jpg') repeat;
+  background-size: cover;
+  color: #3e3e3e;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Playfair Display', serif;
+  color: #2f4f2f;
+}
+
+.navbar {
+  background-color: #4f7942 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  font-family: 'Playfair Display', serif;
+}
+
+.container {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 2rem;
+  border-radius: 12px;
+}
+
+.card {
+  border: none;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #fffaf0;
+}
+
+.card img {
+  object-fit: cover;
+  height: 200px;
+  width: 100%;
+  border-bottom: 1px solid #eee;
+}
+
+.btn-success {
+  background-color: #6b8e23;
+  border-color: #6b8e23;
+}
+
+.btn-success:hover {
+  background-color: #556b2f;
+  border-color: #556b2f;
+}
+
+footer {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: #777;
+}
+
+img.divider {
+  max-width: 200px;
+  display: block;
+  margin: 0 auto 2rem;
+}
+
 /*# sourceMappingURL=style.css.map */
