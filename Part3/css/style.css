@@ -1,160 +1,179 @@
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap");
-/* fonts import */
-@import url("../fonts/octin_sports_rg.ttf");
+/* ========== Fonts ========== */
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap");
+
+/* ========== Global Layout ========== */
 body {
-  font-family: "Poppins", sans-serif;
-  color: #0c0c0c;
-  background-color: #ffffff;
-  overflow-x: hidden;
-}
-
-.layout_padding {
-  padding: 90px 0;
-}
-
-.layout_padding2 {
-  padding: 45px 0;
-}
-
-.layout_padding2-top {
-  padding-top: 45px;
-}
-
-.layout_padding2-bottom {
-  padding-bottom: 45px;
-}
-
-.layout_padding-top {
-  padding-top: 90px;
-}
-
-.layout_padding-bottom {
-  padding-bottom: 90px;
-}
-
-.long_section {
-  margin-left: 45px;
-  margin-right: 45px;
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
-.heading_container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
   font-family: 'Playfair Display', serif;
-}
-
-.heading_container h2 {
-  position: relative;
-  font-weight: bold;
-  text-transform: uppercase;
+  background: url("../assets/background.jpg") repeat;
+  background-size: cover;
+  color: #3a3a3a;
   margin: 0;
+  padding: 0;
 }
 
-.heading_container.heading_center {
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  text-align: center;
+header img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  border-bottom: 4px solid #4f7942;
 }
 
-h1,
-h2 {
+h1, h2, h3, h4 {
   font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  color: #2e4631;
 }
 
-/*header section*/
-.header_section {
-  position: absolute;
-  top: 0;
-  width: 100%;
-  z-index: 9;
+.container {
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 2rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
 }
 
-.header_section .container-fluid {
-  padding-right: 25px;
-  padding-left: 25px;
+/* ========== Navbar ========== */
+.navbar {
+  background-color: #4f7942;
+  font-family: 'Playfair Display', serif;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 }
 
-.header_section .nav_container {
-  margin: 0 auto;
+.navbar-brand {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #fff;
 }
 
-.header_section.innerpage_header {
-  position: relative;
-  background: -webkit-gradient(linear, left top, right top, from(#184d47), to(#184d47));
-  background: linear-gradient(to right, #184d47, #184d47);
-  padding: 10px 0;
+.navbar .nav-link {
+  color: #fff !important;
+  margin-left: 1rem;
+  font-size: 1rem;
 }
 
-.custom_nav-container {
-  padding-left: 0;
-  padding-right: 0;
+.navbar .nav-link:hover {
+  color: #d4edc3 !important;
 }
 
-.custom_menu-btn {
-  position: fixed;
-  right: 25px;
-  top: 15px;
-  width: 50px;
-  height: 50px;
-}
-
-.custom_menu-btn::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  background-color: white;
-  -webkit-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.07);
-          box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.07);
-  z-index: 7;
-  border-radius: 100%;
-  -webkit-transition: all .3s;
-  transition: all .3s;
-}
-
-.custom_menu-btn.menu_btn-style::before {
-  width: 100vh;
-  height: 100vh;
-  background-color: #184d47;
-  -webkit-transform: scale(7);
-          transform: scale(7);
-  border-radius: 0;
-}
-
-.custom_menu-btn button {
-  width: 50px;
-  height: 50px;
-  outline: none;
-  border: none;
-  border-radius: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
+/* ========== Hero Section ========== */
+.hero {
+  background: url("../assets/hero.jpg") center center/cover no-repeat;
+  height: 350px;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  background-color: transparent;
-  position: relative;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero h1 {
+  color: #fff;
+  background-color: rgba(0,0,0,0.5);
+  padding: 1rem 2rem;
+  border-radius: 10px;
+}
+
+/* ========== Leaf Divider ========== */
+.divider {
+  display: block;
+  margin: 2rem auto;
+  max-width: 180px;
+  height: auto;
+}
+
+/* ========== Product Card ========== */
+.card {
+  border: none;
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: #fffaf0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.card-img-top {
+  height: 220px;
+  object-fit: cover;
+}
+
+.card-title {
+  font-size: 1.2rem;
+  color: #2f4f2f;
+}
+
+.card-text {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+/* ========== Button Style ========== */
+.btn-success {
+  background-color: #6b8e23;
+  border-color: #6b8e23;
+}
+
+.btn-success:hover {
+  background-color: #556b2f;
+  border-color: #556b2f;
+}
+
+.btn-outline-light:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ========== Cart Section ========== */
+#cartItems,
+#cartSummary {
+  font-size: 0.95rem;
+}
+
+#totalPrice,
+#totalAmount {
+  font-weight: bold;
+  color: #2e4631;
+}
+
+/* ========== Footer ========== */
+footer {
+  background-color: #f0efe8;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #777;
+  padding: 2rem 1rem 1rem;
+}
+
+/* ========== Forms ========== */
+form input,
+form textarea {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem;
+}
+
+form input:focus,
+form textarea:focus {
+  border-color: #6b8e23;
+  box-shadow: none;
+}
+
+/* ========== Admin Product Images ========== */
+.list-group-item img {
+  border-radius: 8px;
+  margin: 0.5rem 0;
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 768px) {
+  .navbar-brand {
+    font-size: 1.4rem;
+  }
+
+  .hero h1 {
+    font-size: 1.5rem;
+    padding: 0.75rem 1.5rem;
+  }
+}
   z-index: 999;
   margin: 0;
 }
