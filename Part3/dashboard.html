@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Product Management</title>
+    <link h..p@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Sweetleaf & Co.</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="checkout.html">Checkout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-4">
+        <h1 class="text-center mb-4">Product Management Dashboard</h1>
+
+        <!-- Product Form -->
+        <div class="card mb-4">
+            <div class="card-header bg-success text-white">
+                <h5>Add New Product</h5>
+            </div>
+            <div class="card-body">
+                <form id="productForm">
+                    <div class="mb-3">
+                        <label for="productName" class="form-label">Product Name</label>
+                        <input type="text" class="form-control" id="productName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="productPrice" class="form-label">Price</label>
+                        <input type="number" class="form-control" id="productPrice" step="0.01" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="productDescription" class="form-label">Description</label>
+                        <textarea class="form-control" id="productDescription" rows="3" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="productImage" class="form-label">Image URL (Optional)</label>
+                        <input type="url" class="form-control" id="productImage">
+                    </div>
+                    <button type="submit" class="btn btn-success w-100">Add Product</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Product List -->
+        <h3>Current Products</h3>
+        <div class="row" id="productList"></div>
+    </div>
+
+    <script>
+        // Get existing products from localStorage
+        function getProducts() {
+            return JSON.parse(localStorage.getItem('products')) || [];
+        }
+
+        // Display products in the dashboard
+        function displayProducts() {
+            const products = getProducts();
+            const productList = document.getElementById('productList');
+            productList.innerHTML = '';
+            products.forEach((product, index) => {
+                const productCard = document.createElement('div');
+                productCard.classList.add('col-md-4', 'mb-4');
+                productCard.innerHTML = `
+                    <div class="card">
+                        <img src="${product.image || 'https://via.placeholder.com/150'}" class="card-img-top" alt="${product.name}">
+                        <div class="card-body">
+                            <h5 class="card-title">${product.name}</h5>
+                            <p class="card-text">${product.description}</p>
+                            <p class="card-text"><strong>$${product.price.toFixed(2)}</strong></p>
+                            <button class="btn btn-danger" onclick="deleteProduct(${index})">Delete</button>
+                        </div>
+                    </div>
+                `;
+                productList.appendChild(productCard);
+            });
+        }
+
+        // Add product to localStorage
+        function addProduct(product) {
+            const products = getProducts();
+            products.push(product);
+            localStorage.setItem('products', JSON.stringify(products));
+        }
+
+        // Delete product from localStorage
+        function deleteProduct(index) {
+            const products = getProducts();
+            products.splice(index, 1);
+            localStorage.setItem('products', JSON.stringify(products));
+            displayProducts();
+        }
+
+        // Handle form submission
+        document.getElementById('productForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('productName').value;
+            const price = parseFloat(document.getElementById('productPrice').value);
+            const description = document.getElementById('productDescription').value;
+            const image = document.getElementById('productImage').value;
+
+            const newProduct = {
+                name,
+                price,
+                description,
+                image
+            };
+
+            addProduct(newProduct);
+            displayProducts();
+
+            // Reset the form
+            this.reset();
+        });
+
+        // Initialize the dashboard
+        displayProducts();
+    </script>
+
+    <script s..p@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
